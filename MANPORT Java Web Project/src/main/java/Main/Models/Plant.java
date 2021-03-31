@@ -1,71 +1,92 @@
 package Main.Models;
 
-import javax.persistence.*;
 
-@Entity(name = "Plant")
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 @Table
 public class Plant {
-
     @Id
-    @GeneratedValue
-    @Column(nullable=false)
-    private Long PlantID;
-    @ManyToOne
-    @JoinColumn(name="CountryID")
-    private Country CountryID;
-    private Long ProductionID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long plantID;
     private String shortCode;
-    private String fullName;
+    private String plantName;
     private Integer liveAppCount;
 
-    //Constructor
+    @OneToMany(mappedBy = "plant")
+    private List<Production> productions;
+
+    @OneToMany(mappedBy = "plant")
+    private List<PlantApp> plantApp;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name=("countryID"))
+    private Country country;
+
+
     public Plant() {
     }
 
-    public Plant(Long productionID, String shortCode, String fullName) {
-        ProductionID = productionID;
+    public Plant(String shortCode,
+                 String plantName,
+                 Integer liveAppCount,
+                 Country country) {
         this.shortCode = shortCode;
-        this.fullName = fullName;
-    }/*
-    // Getters
-    public Long getCountryID() {
-        return CountryID;
+        this.plantName = plantName;
+        this.liveAppCount = liveAppCount;
+        this.country = country;
     }
-*/
-    public Long getProductionID() {
-        return ProductionID;
+
+
+    public Long getPlantID() {
+        return plantID;
     }
 
     public String getShortCode() {
         return shortCode;
     }
 
-    public String getFullName() {
-        return fullName;
+    public void setShortCode(String shortCode) {
+        this.shortCode = shortCode;
+    }
+
+    public String getPlantName() {
+        return plantName;
+    }
+
+    public void setPlantName(String plantName) {
+        this.plantName = plantName;
     }
 
     public Integer getLiveAppCount() {
         return liveAppCount;
     }
 
-    //Setters
-    //public void setCountryID(Long countryID) {
-    //    CountryID = countryID;
-    //}
-
-    public void setProductionID(Long productionID) {
-        ProductionID = productionID;
-    }
-
-    public void setShortCode(String shortCode) {
-        this.shortCode = shortCode;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public void setLiveAppCount(Integer liveAppCount) {
         this.liveAppCount = liveAppCount;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public List<Production> getProductions() {
+        return productions;
+    }
+    public void setProductions(List<Production> productions) {
+        this.productions = productions;
+    }
+
+    public List<PlantApp> getPlantApp() {
+        return plantApp;
+    }
+
+    public void setPlantApp(List<PlantApp> plantApp) {
+        this.plantApp = plantApp;
     }
 }

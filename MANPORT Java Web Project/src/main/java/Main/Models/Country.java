@@ -1,16 +1,16 @@
 package Main.Models;
 
+
 import javax.persistence.*;
 
 @Entity
 @Table
 public class Country {
     @Id
-    @GeneratedValue
-    @Column(nullable=false)
-    private Long CountryID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long countryID;
     private String countryName;
-    private Integer numberOfAppsUsed;
+    private Integer appCount;
 
     public Country() {
     }
@@ -20,22 +20,22 @@ public class Country {
     }
 
     public Long getCountryID() {
-        return CountryID;
+        return countryID;
     }
 
     public String getCountryName() {
         return countryName;
     }
 
-    public Integer getNumberOfAppsUsed() {
-        return numberOfAppsUsed;
-    }
-
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
 
-    public void setNumberOfAppsUsed(Integer numberOfAppsUsed) {
-        this.numberOfAppsUsed = numberOfAppsUsed;
+    public Integer getAppCount() {
+        return appCount;
+    }
+
+    public void setAppCount(Integer appCount) {
+        this.appCount = appCount;
     }
 }
