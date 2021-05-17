@@ -15,6 +15,7 @@ class Applications extends Component {
                             {
                                 applications.map(application => {
                                     return (
+                                        
                                         <ApplicationComponent
                                             key              = {application.applicationID}
                                             applicationID    = {application.applicationID}
@@ -25,7 +26,6 @@ class Applications extends Component {
                                             lcOfFrontendCode = {application.lcOfFrontendCode}
                                             lineStopRisk     = {application.lineStopRisk} 
                                             livePlantsCount  = {application.livePlantsCount}
-
                                             /*plantApp         = {application.plantApp}*/
                                             
                                         />

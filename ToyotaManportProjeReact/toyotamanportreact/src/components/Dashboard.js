@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ApplicationConsumer from "../context.js";
+import PlantAppComponent from './PlantAppComponent.js';
 
 
 class Dashboard extends Component {
@@ -21,9 +22,9 @@ class Dashboard extends Component {
 
                                     <div className="row">
                                         {
-                                            applications.map(application => {
+                                            applications.map((application, index) => {
                                                 return (
-                                                    <div className="col-md-6 equel-grid">
+                                                    <div key={index} className="col-md-6 equel-grid">
                                                         <div className="grid">
 
                                                             <div className="grid-body py-3 split-header" style={{ backgroundColor: "#c7c5bf" }}>
@@ -35,15 +36,16 @@ class Dashboard extends Component {
                                                                     </button><i className="mdi mdi-chevron-down mr-n1 ml-2"></i>
                                                                 </div>
                                                             </div>
-
-                                                            <div className="container row mx-0 px-n1">
-
+                                                            <PlantAppComponent
+                                                                applicationID={application.applicationID}
+                                                            />
+                                                            { /* 
                                                                 <div className="col-3 equel-grid pt-2">
                                                                     <div className="grid">
                                                                         <div className="grid-body text-black py-0 px-0">
 
                                                                             <div className="plant" style={{ backgroundColor: "#c7c5bf" }}>
-                                                                                <p className="text-black text-center">TURKEY</p>
+                                                                                <p className="text-black text-center"> TURKEY </p>
                                                                             </div>
 
                                                                             <div className="equel-grid">
@@ -74,8 +76,8 @@ class Dashboard extends Component {
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                */}
 
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 )

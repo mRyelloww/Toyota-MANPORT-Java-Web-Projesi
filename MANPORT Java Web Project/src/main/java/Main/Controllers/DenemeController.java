@@ -10,14 +10,14 @@ import Main.Repositories.ImpactRepo;
 import Main.Repositories.JobsRepo;
 import Main.Services.DenemeService;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(path = "deneme")
 public class DenemeController {
@@ -48,11 +48,25 @@ public class DenemeController {
     @RequestMapping(path = "/plant")
     public List<Plant> getPlant()  { return denemeService.getPlants(); }
 
+    @RequestMapping(path = "/plantapp")
+    public List<PlantApp> getPlantApps()  { return denemeService.getPlantApps(); }
+
     @RequestMapping(path = "/application")
     public List<Application> getApplication()  {
         return denemeService.getApplications();
     }
 
+    @RequestMapping(path = "/issues")
+    public List<Issues> getIssues()  {
+        return denemeService.getIssues();
+    }
+    /*
+    @RequestMapping(path = "/issues/deniyoruz")
+    public List<Issues> issueTanimla()  {
+        denemeService.issueTanimla();
+        return denemeService.getIssues();
+    }
+     */
 
 
 }

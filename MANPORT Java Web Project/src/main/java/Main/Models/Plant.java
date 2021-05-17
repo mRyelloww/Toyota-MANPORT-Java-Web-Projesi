@@ -1,11 +1,14 @@
 package Main.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
+@JsonIgnoreProperties({"plantApp"})
 public class Plant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

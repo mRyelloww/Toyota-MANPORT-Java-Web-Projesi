@@ -50,11 +50,20 @@ public class Production {
         this.productionName = productionName;
     }
 
-//    public List<Jobs> getJob() {
-//        return jobs;
-//    }
+
+    public List<Jobs> getJobs() {
+        return jobs;
+    }
 //
-//    public void setJob(List<Jobs> jobs) {
-//        this.jobs = jobs;
-//    }
+    public void setJobs(List<Jobs> jobs) {
+        this.jobs = jobs;
+    }
+//
+//     public Plant getPlant() {
+//         return plant;
+//     }
+//
+//     public void setPlant(Plant plant) {
+//         this.plant = plant;
+//     }
 }

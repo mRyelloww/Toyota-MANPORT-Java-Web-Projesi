@@ -8,7 +8,8 @@ import java.util.List;
 
 @Entity
 @Table
-@JsonIgnoreProperties({"application" , "plant"})
+//@JsonIgnoreProperties({"application" , "plant"})
+@JsonIgnoreProperties({"issues"})
 public class PlantApp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
