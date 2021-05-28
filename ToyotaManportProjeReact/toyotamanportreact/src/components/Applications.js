@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ApplicationComponent from "./ApplicationComponent";
 import ApplicationConsumer from "../context.js";
+import ApplicationService from "../services/ApplicationService.js";
+import axios from "axios";
+
 
 class Applications extends Component {
     render() {
@@ -13,7 +16,10 @@ class Applications extends Component {
                     return (
                         <div>
                             {
-                                applications.map(application => {
+                                applications.map((application,index) => {
+                                    if(index === 0){
+                                        //application.shortCode = "CAN";
+                                    }
                                     return (
                                         
                                         <ApplicationComponent

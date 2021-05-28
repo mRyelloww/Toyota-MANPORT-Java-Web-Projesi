@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
 
 export default class Navbar extends Component {
     render() {
@@ -35,6 +34,35 @@ export default class Navbar extends Component {
                                     <div className="dropdown-header">
                                         <h6 className="dropdown-title">Notifications</h6>
                                         <p className="dropdown-title-text">You have 4 unread notification</p>
+                                    </div>
+                                    <div className="dropdown-body">
+                                        <div className="dropdown-list">
+                                            <div className="icon-wrapper rounded-circle bg-inverse-primary text-primary">
+                                                <i className="mdi mdi-alert"></i>
+                                            </div>
+                                            <div className="content-wrapper">
+                                                <small className="name">Storage Full</small>
+                                                <small className="content-text">Server storage almost full</small>
+                                            </div>
+                                        </div>
+                                        <div className="dropdown-list">
+                                            <div className="icon-wrapper rounded-circle bg-inverse-success text-success">
+                                                <i className="mdi mdi-cloud-upload"></i>
+                                            </div>
+                                            <div className="content-wrapper">
+                                                <small className="name">Upload Completed</small>
+                                                <small className="content-text">3 Files uploded successfully</small>
+                                            </div>
+                                        </div>
+                                        <div className="dropdown-list">
+                                            <div className="icon-wrapper rounded-circle bg-inverse-warning text-warning">
+                                                <i className="mdi mdi-security"></i>
+                                            </div>
+                                            <div className="content-wrapper">
+                                                <small className="name">Authentication Required</small>
+                                                <small className="content-text">Please verify your password to continue using cloud services</small>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="dropdown-footer">
                                         <a href="#">View All</a>

@@ -12,6 +12,7 @@ import AddApplication from './components/AddApplication';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
+import "../src/"
 
 
 function App() {
@@ -30,13 +31,13 @@ function App() {
           </div>
         </div>
 
-        {/*
-      <script src="../assets/vendors/js/core.js"></script>
-      <script src="../assets/vendors/apexcharts/apexcharts.min.js"></script>
-      <script src="../assets/vendors/chartjs/Chart.min.js"></script>
-      <script src="../assets/js/charts/chartjs.addon.js"></script>
-      <script src="../assets/js/template.js"></script>
-      <script src="../assets/js/dashboard.js"></script>  */}
+        
+      <script src="../src/assets/vendors/js/core.js"></script>
+      <script src="../src/assets/vendors/apexcharts/apexcharts.min.js"></script>
+      <script src="../src/assets/vendors/chartjs/Chart.min.js"></script>
+      <script src="../src/assets/js/charts/chartjs.addon.js"></script>
+      <script src="../src/assets/js/template.js"></script>
+      <script src="../src/assets/js/dashboard.js"></script>  
       </body>
     </Router>
   );

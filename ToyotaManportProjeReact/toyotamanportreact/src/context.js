@@ -3,28 +3,33 @@ import axios from "axios";
 
 const ApplicationContext = React.createContext();
 // Provider , Consumer vermiş olacak bize 
-const reducer = (state,action) => {    
-    
-  switch(action.type){
+const reducer = (state, action) => {
+
+  switch (action.type) {
     case "DELETE_APPLICATION":
-      return{
+      return {
         ...state,
         applications: state.applications.filter(application => action.payload !== application.applicationID)
       }
     case "ADD_APPLICATION":
-      return{
+      return {
         ...state,
-        applications : [...state.applications , action.payload]
+        applications: [...state.applications, action.payload]
       }
+    /*case "CHANGE_APPLICATION_NAME":
+      return {
+        ...state,
+        applications: state.applications.map(application =>{ application.applicationID==action.payload.applicationID ? application.shortCode = action.payload : null})
+      }*/
     default:
       return state
   }
-  
+
 }
 
 export class ApplicationProvider extends Component {
-    state = {
-        applications: [/*
+  state = {
+    applications: [/*
           {
             id : "unique-1",
             name : "Mustafa Murat Coşkun",
@@ -37,28 +42,28 @@ export class ApplicationProvider extends Component {
             salary : "7",
             department : "RS8"
           }*/
-        ],
-        dispatch : action => {
-          this.setState(state => reducer(state,action))
-        }
+    ],
+    dispatch: action => {
+      this.setState(state => reducer(state, action))
     }
-    
-    componentDidMount = async () => {
-        const response = await axios.get("http://localhost:8080/deneme/application")       
-        console.log(response);
-        
-        this.setState({
-            applications: response.data
-        })
-        
-    }
-    render() {
-        return (
-            <ApplicationContext.Provider value = {this.state}> 
-            {this.props.children}
-            </ApplicationContext.Provider>
-        )
-    }
+  }
+
+  componentDidMount = async () => {
+    const response = await axios.get("http://localhost:8080/deneme/application")
+    console.log(response);
+
+    this.setState({
+      applications: response.data
+    })
+
+  }
+  render() {
+    return (
+      <ApplicationContext.Provider value={this.state}>
+        {this.props.children}
+      </ApplicationContext.Provider>
+    )
+  }
 }
 const ApplicationConsumer = ApplicationContext.Consumer;
 

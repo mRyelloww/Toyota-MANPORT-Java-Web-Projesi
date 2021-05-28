@@ -20,6 +20,7 @@ public class Application {
     private String lcOfFrontendCode;
     private Boolean lineStopRisk;
     private Integer livePlantsCount;
+    private Boolean visibility;
 
     @OneToMany(mappedBy = "application")
     private List<MiddleWare> middleWare;
@@ -57,6 +58,7 @@ public class Application {
                        String lcOfFrontendCode,
                        Boolean lineStopRisk,
                        Integer livePlantsCount,
+                       Boolean visibility,
                        Frontend frontend,
                        Backend backend,
                        DatabaseName databaseName,
@@ -69,6 +71,7 @@ public class Application {
         this.lcOfFrontendCode = lcOfFrontendCode;
         this.lineStopRisk = lineStopRisk;
         this.livePlantsCount = livePlantsCount;
+        this.visibility = visibility;
         this.frontend = frontend;
         this.backend = backend;
         this.databaseName = databaseName;
@@ -194,5 +197,13 @@ public class Application {
 
     public void setPlantApp(List<PlantApp> plantApp) {
         this.plantApp = plantApp;
+    }
+
+    public Boolean getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(Boolean visibility) {
+        this.visibility = visibility;
     }
 }

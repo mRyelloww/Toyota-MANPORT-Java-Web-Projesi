@@ -11,9 +11,7 @@ import Main.Repositories.JobsRepo;
 import Main.Services.DenemeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,8 +33,8 @@ public class DenemeController {
     }
 
     @RequestMapping(path = "/country")
-    public List<Country> getCountry()  {
-        return denemeService.getCountry();
+    public List<Country> getCountries()  {
+        return denemeService.getCountries();
     }
 
     @RequestMapping(path = "/jobs")
@@ -51,8 +49,42 @@ public class DenemeController {
     @RequestMapping(path = "/plantapp")
     public List<PlantApp> getPlantApps()  { return denemeService.getPlantApps(); }
 
+
+
+    @GetMapping("/plantapp/{id}")
+    public PlantApp getPlantApp(@PathVariable(value = "id") Long id){
+        return denemeService.getPlantApp(id);
+    }
+    @PutMapping(path = "/plantapp/{id}")
+    public PlantApp getPlantApp(@PathVariable(value = "id") Long id, @RequestBody PlantApp plantapp){
+        return denemeService.changePlantApp(id,plantapp);
+    }
+
+    @GetMapping("/application/{id}")
+    public Application getApplication(@PathVariable(value = "id") Long id){
+        return denemeService.getApplication(id);
+    }
+    @PutMapping(path = "/application/{id}")
+    public Application getApplication(@PathVariable(value = "id") Long id, @RequestBody Application application){
+        return denemeService.changeApplicationVisibility(id,application);
+    }
+
+    @GetMapping("/country/{id}")
+    public Country getCountry(@PathVariable(value = "id") Long id){
+        return denemeService.getCountry(id);
+    }
+    @PutMapping(path = "/country/{id}")
+    public Country getCountry(@PathVariable(value = "id") Long id, @RequestBody Country country){
+        return denemeService.changeCountry(id,country);
+    }
+
+    @RequestMapping(path = "/siraliIssues")
+    public List<Issues> getIssuesByRow()  {
+        return denemeService.getIssuesByRow();
+    }
+
     @RequestMapping(path = "/application")
-    public List<Application> getApplication()  {
+    public List<Application> getApplications()  {
         return denemeService.getApplications();
     }
 
@@ -60,6 +92,13 @@ public class DenemeController {
     public List<Issues> getIssues()  {
         return denemeService.getIssues();
     }
+
+/*
+    @RequestMapping(value = "/plantapp/{id}" , method = RequestMethod.PUT)
+    public void addImpact(@RequestBody PlantApp pltapp , @PathVariable(value = "id") Long id){
+        denemeService.addPlantAppImpact(id);
+    }
+*/
     /*
     @RequestMapping(path = "/issues/deniyoruz")
     public List<Issues> issueTanimla()  {

@@ -42,7 +42,7 @@ class ApplicationComponent extends Component {
                             <div className = "card"  style = {isVisible ? {backgroundColor : "#62848d", color : "white"} : null}>
                                 <div className = "card-header d-flex justify-content-between">
                                     <h4 className = "d-inline" onClick = {this.onClickEvent}> {shortCode}</h4>
-                                    <i onClick={this.onDeleteApplication.bind(this,dispatch)} className = "fas fa-trash-alt"  style = {{cursor : "pointer"}}></i>
+                                    <button onClick={this.onDeleteApplication.bind(this,dispatch)} className = "fas fa-trash-alt"  style = {{cursor : "pointer"}}></button> 
                                 </div>
                                 {
                                  isVisible ? 

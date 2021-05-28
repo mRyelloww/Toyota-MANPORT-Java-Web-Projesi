@@ -5,10 +5,23 @@ import PlantAppService from '../services/PlantAppService.js';
 import IssueComponent from './IssueComponent.js'
 import IssueConsumer from '../IssueContext.js';
 import IssueService from '../services/IssueService.js';
+import axios from 'axios';
+
 
 
 
 class PlantAppComponent extends Component {
+    updatePlantAppDatabase(plantapp,impactLvlID){
+        const data ={
+            "plantAppID":plantapp.plantAppID,
+            "alive":plantapp.alive,
+            "impact":impactLvlID,
+            "application":plantapp.application,
+            "plant":plantapp.plant
+        }
+        axios.put("http://localhost:8080/deneme/plantapp/1",data)
+
+    }
     componentDidMount() {
         PlantAppService.getPlantApps().then((response) => {
             this.setState({ plantapps: response.data });
@@ -58,8 +71,60 @@ class PlantAppComponent extends Component {
         }
 
     }
-    plantTitle(){
-        
+    plantTitle(plantapp) {
+        var prodsHighestImpacts = [];
+        return (
+            <IssueConsumer>
+                {
+                    value => {
+
+                        plantapp.plant.productions.map(plantAppProd => {
+
+                            const { issues } = value;
+                            var prodEnYuksekImpactLevel = 0;
+
+                            issues.map(issue => {
+                                if (issue.plantApp != null) { // İçerisinde veri bulundurmayan bir Issue oluşturulmuş olabilir.O yüzden bu condition var.
+                                    if (plantapp.plantAppID === issue.plantApp.plantAppID) {
+                                        issue.plantApp.plant.productions.map(prod => {
+                                            if (prod.productionID === plantAppProd.productionID) {
+                                                issue.issueJobType.map(jobInIssue => {
+                                                    prod.jobs.map(job => {
+                                                        if (jobInIssue.jobID === job.jobID) {
+                                                            if (jobInIssue.impact.impactID > prodEnYuksekImpactLevel) {
+                                                                prodEnYuksekImpactLevel = jobInIssue.impact.impactID
+                                                                prodsHighestImpacts.push(prodEnYuksekImpactLevel);
+                                                            }
+                                                        }
+                                                    })
+                                                })
+                                            }
+                                        })
+                                    }
+                                    else {
+                                        prodsHighestImpacts.push(1);
+                                    }
+                                }
+                            })
+
+                        })
+                        var sonKarar = 0;
+                        prodsHighestImpacts.map(data => {
+                            if (data > sonKarar) {
+                                sonKarar = data;
+                            }
+                        })
+                        return (
+                            <div className="plant" style={{ backgroundColor: this.impactaGoreRenkAl(sonKarar) }}>
+                                { this.updatePlantAppDatabase(plantapp,sonKarar) }
+                                <p className="text-black text-center"> {plantapp.plant.country.countryName /*+ sonKarar*/} </p>
+                            </div>
+                        )
+                    }
+                }
+            </IssueConsumer>
+
+        )
     }
     prodTitle(plantAppID, prodName, prodID, jobID) {
         return (
@@ -68,35 +133,33 @@ class PlantAppComponent extends Component {
                     value => {
                         const { issues } = value;
                         var match = false;
-                        var enYuksekImpactLevel = 1;
-                        return (
-                            issues.map(issue => {
-                                return (
-                                    issue.plantApp == null ? // İçerisinde veri bulundurmayan bir Issue oluşturmuş olabilir.O yüzden bu condition var.
-                                        null
-                                        :
-                                        plantAppID == issue.plantApp.plantAppID ?
-                                            issue.plantApp.plant.productions.map(prod => {
-                                                if (prodID === prod.productionID) {
-                                                    issue.issueJobType.map(jobInIssue => {
-                                                        prod.jobs.map(job=>{
-                                                            if(jobInIssue.jobID === job.jobID){
-                                                                if (jobInIssue.impact.impactID > enYuksekImpactLevel) {
-                                                                    enYuksekImpactLevel = jobInIssue.impact.impactID
-                                                                }
-                                                            }
-                                                        })
-                                                    })
-                                                }
+                        var prodEnYuksekImpactLevel = 1;
+
+                        issues.map(issue => {
+                            if (issue.plantApp != null) { // İçerisinde veri bulundurmayan bir Issue oluşturmuş olabilir.O yüzden bu condition var.
+                                if (plantAppID == issue.plantApp.plantAppID) {
+                                    issue.plantApp.plant.productions.map(prod => {
+                                        if (prodID === prod.productionID) {
+                                            issue.issueJobType.map(jobInIssue => {
+                                                prod.jobs.map(job => {
+                                                    if (jobInIssue.jobID === job.jobID) {
+                                                        if (jobInIssue.impact.impactID > prodEnYuksekImpactLevel) {
+                                                            prodEnYuksekImpactLevel = jobInIssue.impact.impactID
+                                                        }
+                                                    }
+                                                })
                                             })
-                                            :
-                                            null
-                                )
-                            }),
-                            < div className="prod" style={{ backgroundColor: this.impactaGoreRenkAl(enYuksekImpactLevel) }}>
+                                        }
+                                    })
+                                }
+                            }
+                        })
+                        return (
+                            <div className="prod" style={{ backgroundColor: this.impactaGoreRenkAl(prodEnYuksekImpactLevel) }}>
                                 <p className="text-black text-center"> {prodName /*+ " ID:" + prodID*/} </p>
                             </div>
                         )
+
                     }
                 }
             </IssueConsumer>
@@ -123,9 +186,8 @@ class PlantAppComponent extends Component {
                                                             {
                                                                 <div className="grid-body text-black py-0 px-0">
 
-                                                                    <div className="plant" style={{ backgroundColor: "#c7c5bf" }}>
-                                                                        <p className="text-black text-center"> {plantapp.plant.country.countryName} </p>
-                                                                    </div>
+                                                                    {this.plantTitle(plantapp)}
+
                                                                     {
                                                                         plantapp.plant.productions.map(prod => {
                                                                             return (
@@ -133,7 +195,8 @@ class PlantAppComponent extends Component {
                                                                                     <div className="grid mt-1 mb-0">
                                                                                         <div className="grid-body text-black pt-0 px-0">
 
-                                                                                            {this.prodTitle(plantapp.plantAppID, prod.productionName, prod.productionID, prod.jobID)}
+
+                                                                                            {this.prodTitle(plantapp.plantAppID, prod.productionName, prod.productionID, prod.jobID, "forProd")}
 
                                                                                             <div className="container row mx-0 px-0">
                                                                                                 {prod.jobs.map(job => {

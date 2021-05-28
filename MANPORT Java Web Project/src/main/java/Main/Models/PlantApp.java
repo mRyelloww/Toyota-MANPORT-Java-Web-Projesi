@@ -16,6 +16,10 @@ public class PlantApp {
     private Long plantAppID;
     private Boolean alive;
 
+    //@ManyToOne
+    //@JoinColumn(name=("impactID"))
+    private Integer impact;
+
     @ManyToOne
     @JoinColumn(name="applicationID")
     private Application application;
@@ -78,5 +82,12 @@ public class PlantApp {
     public void setIssues(List<Issues> issues) {
         this.issues = issues;
     }
-    //
+
+    public Integer getImpact() {
+        return impact;
+    }
+
+    public void setImpact(Integer impact) {
+        this.impact = impact;
+    }
 }

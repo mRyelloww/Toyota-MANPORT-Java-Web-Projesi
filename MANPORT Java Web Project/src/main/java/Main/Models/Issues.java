@@ -5,6 +5,7 @@ import jdk.nashorn.internal.objects.annotations.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -14,9 +15,9 @@ public class Issues {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long issueID;
-    private LocalDate date;
+    private LocalDateTime date;
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue" ,fetch = FetchType.LAZY)
     public List<Jobs> issueJobType;
 
     //private String issueProdType;
@@ -36,7 +37,7 @@ public class Issues {
 
     public Issues(/*PlantApp plantApp,*/
                   /*Impact impact,*/
-                  LocalDate date,
+                  LocalDateTime date,
                   String description
                   ) {
         this.date = date;
@@ -54,11 +55,11 @@ public class Issues {
         this.issueID = issueID;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -68,11 +69,11 @@ public class Issues {
     public void setIssueJobType(List<Jobs> issueJobType) {
         this.issueJobType = issueJobType;
     }
-/*
+
     public void addIssueJobType(Jobs job){
         this.issueJobType.add(job);
     }
-*/
+
 
     public String getDescription() {
         return description;

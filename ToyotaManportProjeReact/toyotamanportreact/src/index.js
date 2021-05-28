@@ -7,15 +7,18 @@ import reportWebVitals from './reportWebVitals';
 import { ApplicationProvider } from './context';
 import { PlantAppProvider } from './PlantAppContext';
 import { IssueProvider } from './IssueContext';
+import { CountryProvider } from './CountryContext';
 
 ReactDOM.render(
-  <IssueProvider>
-    <PlantAppProvider>
-      <ApplicationProvider>
-        <App />
-      </ApplicationProvider>
-    </PlantAppProvider>
-  </IssueProvider>
+  <CountryProvider>
+    <IssueProvider>
+      <PlantAppProvider>
+        <ApplicationProvider>
+          <App />
+        </ApplicationProvider>
+      </PlantAppProvider>
+    </IssueProvider>
+  </CountryProvider>
   ,
   document.getElementById('root')
 );

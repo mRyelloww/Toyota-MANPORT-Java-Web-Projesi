@@ -20,7 +20,7 @@ public class Jobs {
     @JoinColumn(name=("impactID"))
     private Impact impact;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name=("issueID"))
     private Issues issue;
 
