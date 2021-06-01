@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import IssueConsumer from '../IssueContext.js';
 import IssueService from '../services/IssueService.js';
 
-class IssueComponent extends Component {
+class JobIssueComponent extends Component {
     componentDidMount() {
         IssueService.getIssues().then((response) => {
 
@@ -85,4 +85,4 @@ class IssueComponent extends Component {
         )
     }
 }
-export default IssueComponent;
+export default JobIssueComponent;

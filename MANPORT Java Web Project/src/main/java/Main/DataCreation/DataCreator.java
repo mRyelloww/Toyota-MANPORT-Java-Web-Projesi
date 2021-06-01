@@ -100,14 +100,14 @@ public class DataCreator {
                     "Can",
                     ">50K",
                     ">10K",
-                    false,
+                    true,
                     0,
                     false,
                     frontendRepo.getOne((long)1),
                     backendRepo.getOne((long)1),
                     databaseNameRepo.getOne((long)1),
                     responsibleTeamRepo.getOne((long)1),
-                    businessAreaRepo.getOne((long)1))
+                    businessAreaRepo.getOne((long)3))
             );
             applicationRepo.save(new Application(
                     "CVQS",
@@ -122,7 +122,7 @@ public class DataCreator {
                     backendRepo.getOne((long)1),
                     databaseNameRepo.getOne((long)1),
                     responsibleTeamRepo.getOne((long)1),
-                    businessAreaRepo.getOne((long)1))
+                    businessAreaRepo.getOne((long)2))
             );
 
             middleWareRepo.save(new MiddleWare("11","9",null,null,applicationRepo.getOne((long)1)) );

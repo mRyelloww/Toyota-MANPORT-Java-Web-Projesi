@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import PlantAppConsumer from '../PlantAppContext.js';
 import PlantAppService from '../services/PlantAppService.js';
-import IssueComponent from './IssueComponent.js'
+import JobIssueComponent from './JobIssueComponent.js'
 import IssueConsumer from '../IssueContext.js';
 import IssueService from '../services/IssueService.js';
 import axios from 'axios';
@@ -204,7 +204,7 @@ class PlantAppComponent extends Component {
                                                                                                         <div className="col-4 equel-grid pt-1 px-0">
                                                                                                             <div className="grid my-0">
                                                                                                                 <div className="grid-body text-black py-0 px-0">
-                                                                                                                    <IssueComponent
+                                                                                                                    <JobIssueComponent
                                                                                                                         applicationID={plantapp.application.applicationID}
                                                                                                                         plantID={plantapp.plant.plantID}
                                                                                                                         prodID={prod.productionID}

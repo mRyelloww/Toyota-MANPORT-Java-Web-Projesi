@@ -22,7 +22,7 @@ const Animation = posed.div(
         }
     }
 );
-class AddApplication extends Component {
+class denemeAddApp extends Component {
 
     state = {
         visible : true,
@@ -138,4 +138,4 @@ class AddApplication extends Component {
         </ApplicationConsumer>
     }
 }
-export default AddApplication;
+export default denemeAddApp;

@@ -8,11 +8,16 @@ import "./assets/css/shared/style.css"
 
 import Navbar from "./components/Navbar/Navbar.js";
 import Sidebar from "./components/Sidebar/Sidebar.js";
-import AddApplication from './components/AddApplication';
+import denemeAddApp from './components/denemeAddApp';
+import IssuesManagementComponent from './components/IssuesManagementComponent.js';
+import PlantManagementComponent from './components/PlantManagementComponent.js';
+import AddApplicationComponent from './components/AddApplicationComponent.js'
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import "../src/"
+import ManagementComponent from './components/ManagementComponent';
 
 
 function App() {
@@ -26,7 +31,13 @@ function App() {
             <Switch>
             <Route path="/home" exact component={Home} />
             <Route path="/dashboard" component={Dashboard} />
-            <Route path="/addApp" component={AddApplication} />
+            <Route path="/addApp" component={denemeAddApp} />
+            <Route path="/management" component={ManagementComponent} />
+            <Route path="/issuesManagement" component={IssuesManagementComponent} />
+
+            <Route path="/addApplication" component={AddApplicationComponent} />
+            <Route path="/plantManagement" component={PlantManagementComponent} />
+
             </Switch>
           </div>
         </div>
